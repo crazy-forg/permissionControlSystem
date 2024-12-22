@@ -5,47 +5,41 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lijunxi</groupId>
-        <artifactId>lijunxi-auth-parent</artifactId>
+        <artifactId>common</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>service-system</artifactId>
+    <artifactId>service-util</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.lijunxi</groupId>
-            <artifactId>service-util</artifactId>
+            <artifactId>common-util</artifactId>
             <version>1.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.4.1</version>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
-
+        <!--mysql-->
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-engine-core</artifactId>
-            <version>2.0</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.10.5</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
