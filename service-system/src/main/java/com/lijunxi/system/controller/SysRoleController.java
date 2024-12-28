@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -24,6 +25,14 @@ public class SysRoleController {
     @Autowired
     public SysRoleController(SysRoleService sysRoleService) {
         this.sysRoleService = sysRoleService;
+    }
+
+    // 新增角色
+    @ApiOperation("添加角色")
+    @PostMapping("addRole")
+    public Result<?> addRole(@RequestBody SysRole sysRole) {
+        boolean isSuccess = sysRoleService.save(sysRole);
+        return isSuccess ? Result.ok() : Result.fail();
     }
 
     // 查询所有记录
