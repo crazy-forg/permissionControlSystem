@@ -27,6 +27,23 @@ public class SysRoleController {
         this.sysRoleService = sysRoleService;
     }
 
+    // 修改角色
+    @ApiOperation("修改角色")
+    @PostMapping("updateRole")
+    public Result<?> updateRole(@RequestBody SysRole role) {
+        SysRole sysRole = sysRoleService.selectOne(Long.valueOf(role.getId()));
+        if (sysRole != null) {
+            sysRole.setRoleName(role.getRoleName());
+            sysRole.setRoleCode(role.getRoleCode());
+            sysRole.setDescription(role.getDescription());
+            boolean isSuccess = sysRoleService.updateById(sysRole);
+            return isSuccess ? Result.ok() : Result.fail();
+        }
+
+        return Result.fail("角色不存在");
+
+    }
+
     // 新增角色
     @ApiOperation("添加角色")
     @PostMapping("addRole")

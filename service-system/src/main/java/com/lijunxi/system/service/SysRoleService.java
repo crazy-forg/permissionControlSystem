@@ -10,4 +10,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface SysRoleService extends IService<SysRole> {
 
     IPage<SysRole> selectPage(Page<SysRole> pageParams, SysRoleQueryVo sysRoleQueryVo);
+
+    SysRole selectOne(Long id);
 }

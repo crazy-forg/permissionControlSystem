@@ -20,4 +20,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     public IPage<SysRole> selectPage(Page<SysRole> pageParams, SysRoleQueryVo sysRoleQueryVo) {
         return baseMapper.selectPage(pageParams,sysRoleQueryVo);
     }
+
+    @Override
+    public SysRole selectOne(Long id) {
+        return baseMapper.selectById(id);
+    }
 }
