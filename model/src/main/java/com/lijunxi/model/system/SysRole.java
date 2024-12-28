@@ -1,8 +1,8 @@
 package com.lijunxi.model.system;
 
+import com.lijunxi.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.lijunxi.model.base.BaseEntity;
 import lombok.Data;
 
 

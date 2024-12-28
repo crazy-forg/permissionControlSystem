@@ -1,8 +1,6 @@
 package com.lijunxi.model.base;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 
@@ -14,7 +12,7 @@ import java.util.Map;
 @Data
 public class BaseEntity implements Serializable {
 
-    //@TableId(type = IdType.AUTO)
+//    @TableId(type = IdType.AUTO)
     private String id;
 
     @TableField("create_time")

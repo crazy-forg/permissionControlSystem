@@ -1,9 +1,8 @@
 package com.lijunxi.model.system;
 
+import com.lijunxi.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import com.lijunxi.model.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,7 +13,7 @@ import java.util.List;
 @ApiModel(description = "用户")
 @TableName("sys_user")
 public class SysUser extends BaseEntity {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "用户名")
