@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lijunxi.common.result.Result;
 import com.lijunxi.model.system.SysRole;
+import com.lijunxi.model.vo.BatchDeleteRequestVo;
 import com.lijunxi.model.vo.SysRoleQueryVo;
 import com.lijunxi.system.service.SysRoleService;
 import io.swagger.annotations.Api;
@@ -27,7 +28,12 @@ public class SysRoleController {
         this.sysRoleService = sysRoleService;
     }
 
-    // 修改角色
+
+    /**
+     * 修改角色
+     * @param role
+     * @return
+     */
     @ApiOperation("修改角色")
     @PostMapping("updateRole")
     public Result<?> updateRole(@RequestBody SysRole role) {
@@ -44,7 +50,12 @@ public class SysRoleController {
 
     }
 
-    // 新增角色
+
+    /**
+     * 新增角色
+     * @param sysRole
+     * @return
+     */
     @ApiOperation("添加角色")
     @PostMapping("addRole")
     public Result<?> addRole(@RequestBody SysRole sysRole) {
@@ -52,7 +63,32 @@ public class SysRoleController {
         return isSuccess ? Result.ok() : Result.fail();
     }
 
-    // 查询所有记录
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    @ApiOperation("根据id查询角色")
+    @GetMapping("findRoleById/{id}")
+    public Result<?> findRoleById(@PathVariable Long id) {
+
+        if (id == null) {
+            return Result.fail("id不能为空");
+        }
+        //调用service
+        SysRole role = sysRoleService.selectOne(id);
+        if (role != null) {
+            return Result.ok(role);
+        }
+        return Result.fail("角色不存在");
+    }
+
+
+    /**
+     * 查询所有记录
+     * @return
+     */
     @ApiOperation("查询所有角色")
     @GetMapping("findAll")
     public Result<?> findAll() {
@@ -61,7 +97,14 @@ public class SysRoleController {
         return Result.ok(list);
     }
 
-    // 分页查询
+
+    /**
+     * 分页查询
+     * @param pageNum
+     * @param pageSize
+     * @param sysRoleQueryVo
+     * @return
+     */
     @ApiOperation("分页查询")
     @GetMapping("{pageNum}/{pageSize}")
     public Result<?> findQueryRole(@PathVariable Long pageNum, @PathVariable Long pageSize, SysRoleQueryVo sysRoleQueryVo) {
@@ -71,11 +114,31 @@ public class SysRoleController {
         return Result.ok(pageModel);
     }
 
-    // 删除角色
+    /**
+     * 删除角色
+     * @param id
+     * @return
+     */
     @ApiOperation("删除角色")
     @DeleteMapping("remove/{id}")
     public Result<?> remove(@PathVariable("id") Long id) {
         boolean isSuccess = sysRoleService.removeById(id);
+        return isSuccess ? Result.ok() : Result.fail();
+    }
+
+    /**
+     * 批量删除
+     * @param batchDeleteRequestVo
+     * @return
+     */
+    @ApiOperation("批量删除")
+    @PostMapping("batchDelete")
+    public Result<?> batchDelete(@RequestBody BatchDeleteRequestVo batchDeleteRequestVo) {
+        List<Long> ids = batchDeleteRequestVo.getIds();
+        if(ids == null || ids.isEmpty()) {
+            return Result.fail("id数组不能为空");
+        }
+        boolean isSuccess = sysRoleService.removeByIds(ids);
         return isSuccess ? Result.ok() : Result.fail();
     }
 }

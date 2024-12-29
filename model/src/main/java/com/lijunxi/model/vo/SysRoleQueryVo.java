@@ -2,28 +2,19 @@
 //
 package com.lijunxi.model.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
-/**
- * <p>
- * 角色查询实体
- * </p>
- *
- * @author qy
- * @since 2019-11-08
- */
+
+@Setter
+@Getter
 public class SysRoleQueryVo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private String roleName;
 
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
 }
 
