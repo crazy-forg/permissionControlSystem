@@ -1,12 +1,10 @@
 package com.lijunxi.model.vo;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class BatchDeleteRequestVo {
     private List<Long> ids;
 
