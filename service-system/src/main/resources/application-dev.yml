@@ -9,3 +9,6 @@ spring:
     url: jdbc:mysql://localhost:3306/lijunxi-auth?characterEncoding=utf-8&useSSL=false
     username: root
     password: root
+  jackson:
+    date-format: yy-MM-dd HH:mm:ss
+    time-zone: GMT+8

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lijunxi.common.result.Result;
 import com.lijunxi.model.system.SysRole;
 import com.lijunxi.model.vo.BatchDeleteRequestVo;
+import com.lijunxi.model.vo.SysRoleAddVo;
 import com.lijunxi.model.vo.SysRoleQueryVo;
 import com.lijunxi.system.service.SysRoleService;
 import io.swagger.annotations.Api;
@@ -53,13 +54,13 @@ public class SysRoleController {
 
     /**
      * 新增角色
-     * @param sysRole
+     * @param sysRoleAddVo 新增角色条件对象
      * @return
      */
     @ApiOperation("添加角色")
     @PostMapping("addRole")
-    public Result<?> addRole(@RequestBody SysRole sysRole) {
-        boolean isSuccess = sysRoleService.save(sysRole);
+    public Result<?> addRole(@RequestBody SysRoleAddVo sysRoleAddVo ) {
+        boolean isSuccess = sysRoleService.save(sysRoleAddVo);
         return isSuccess ? Result.ok() : Result.fail();
     }
 
@@ -100,15 +101,15 @@ public class SysRoleController {
 
     /**
      * 分页查询
-     * @param pageNum
-     * @param pageSize
-     * @param sysRoleQueryVo
+     * @param sysRoleQueryVo 角色查询条件对象，包含查询所需的角色信息
      * @return
      */
     @ApiOperation("分页查询")
-    @GetMapping("{pageNum}/{pageSize}")
-    public Result<?> findQueryRole(@PathVariable Long pageNum, @PathVariable Long pageSize, SysRoleQueryVo sysRoleQueryVo) {
+    @GetMapping("selectPage")
+    public Result<?> findQueryRole( SysRoleQueryVo sysRoleQueryVo) {
         // 创建page
+        Long pageNum = sysRoleQueryVo.getPageNum();
+        Long pageSize = sysRoleQueryVo.getPageSize();
         Page<SysRole> pageParams = new Page<>(pageNum, pageSize);
         IPage<SysRole> pageModel = sysRoleService.selectPage(pageParams, sysRoleQueryVo);
         return Result.ok(pageModel);

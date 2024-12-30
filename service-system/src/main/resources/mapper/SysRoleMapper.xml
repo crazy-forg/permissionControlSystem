@@ -13,6 +13,10 @@
         id ,role_name,role_code,description,create_time,update_time,is_deleted
     </sql>
 
+    <insert id="insert" parameterType="com.lijunxi.model.vo.SysRoleAddVo">
+        INSERT INTO sys_role ( role_name, role_code, description ) VALUES ( #{roleName}, #{roleCode}, #{description} )
+    </insert>
+
     <select id="selectPage" resultMap="RoleMap">
         select
         <include refid="columns"/>

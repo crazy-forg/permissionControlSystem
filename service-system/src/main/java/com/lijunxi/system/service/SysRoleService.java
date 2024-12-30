@@ -1,6 +1,7 @@
 package com.lijunxi.system.service;
 
 import com.lijunxi.model.system.SysRole;
+import com.lijunxi.model.vo.SysRoleAddVo;
 import com.lijunxi.model.vo.SysRoleQueryVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,4 +13,6 @@ public interface SysRoleService extends IService<SysRole> {
     IPage<SysRole> selectPage(Page<SysRole> pageParams, SysRoleQueryVo sysRoleQueryVo);
 
     SysRole selectOne(Long id);
+
+    boolean save(SysRoleAddVo sysRoleAddVo);
 }

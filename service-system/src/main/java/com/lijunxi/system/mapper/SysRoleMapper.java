@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lijunxi.model.system.SysRole;
 
+import com.lijunxi.model.vo.SysRoleAddVo;
 import com.lijunxi.model.vo.SysRoleQueryVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysRoleMapper extends BaseMapper<SysRole> {
     IPage<SysRole> selectPage(Page<SysRole> pageParams,@Param("vo") SysRoleQueryVo sysRoleQueryVo);
+
+    boolean insert(SysRoleAddVo sysRoleAddVo);
 }

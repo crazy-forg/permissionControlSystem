@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lijunxi.model.system.SysRole;
 
+import com.lijunxi.model.vo.SysRoleAddVo;
 import com.lijunxi.model.vo.SysRoleQueryVo;
 import com.lijunxi.system.mapper.SysRoleMapper;
 import com.lijunxi.system.service.SysRoleService;
@@ -24,5 +25,10 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public SysRole selectOne(Long id) {
         return baseMapper.selectById(id);
+    }
+
+    @Override
+    public boolean save(SysRoleAddVo sysRoleAddVo) {
+        return baseMapper.insert(sysRoleAddVo);
     }
 }
