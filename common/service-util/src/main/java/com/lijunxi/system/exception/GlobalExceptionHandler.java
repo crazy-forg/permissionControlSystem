@@ -12,12 +12,21 @@ public class GlobalExceptionHandler {
 
     /**
      * 全局异常处理
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Result<?> error(Exception e) {
+        e.printStackTrace();
         return Result.fail().message(e.getMessage());
+    }
+
+    @ExceptionHandler(value = CustomException.class)
+    @ResponseBody
+    public Result<?> error(CustomException e) {
+        e.printStackTrace();
+        return Result.fail().message(e.getMessage()).code(e.getCode());
     }
 }
