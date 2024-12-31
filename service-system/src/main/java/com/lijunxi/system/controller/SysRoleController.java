@@ -1,6 +1,7 @@
 package com.lijunxi.system.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lijunxi.common.result.Result;
@@ -32,6 +33,7 @@ public class SysRoleController {
 
     /**
      * 修改角色
+     *
      * @param role
      * @return
      */
@@ -54,12 +56,21 @@ public class SysRoleController {
 
     /**
      * 新增角色
+     *
      * @param sysRoleAddVo 新增角色条件对象
      * @return
      */
     @ApiOperation("添加角色")
     @PostMapping("addRole")
-    public Result<?> addRole(@RequestBody SysRoleAddVo sysRoleAddVo ) {
+    public Result<?> addRole(@RequestBody SysRoleAddVo sysRoleAddVo) {
+        QueryWrapper<SysRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role_name", sysRoleAddVo.getRoleName());
+        int count = sysRoleService.count(queryWrapper);
+
+        if (count > 0) {
+            return Result.fail().message("角色名称重复");
+        }
+
         boolean isSuccess = sysRoleService.save(sysRoleAddVo);
         return isSuccess ? Result.ok() : Result.fail();
     }
@@ -67,6 +78,7 @@ public class SysRoleController {
 
     /**
      * 根据id查询
+     *
      * @param id
      * @return
      */
@@ -88,6 +100,7 @@ public class SysRoleController {
 
     /**
      * 查询所有记录
+     *
      * @return
      */
     @ApiOperation("查询所有角色")
@@ -101,12 +114,13 @@ public class SysRoleController {
 
     /**
      * 分页查询
+     *
      * @param sysRoleQueryVo 角色查询条件对象，包含查询所需的角色信息
      * @return
      */
     @ApiOperation("分页查询")
     @GetMapping("selectPage")
-    public Result<?> findQueryRole( SysRoleQueryVo sysRoleQueryVo) {
+    public Result<?> findQueryRole(SysRoleQueryVo sysRoleQueryVo) {
         // 创建page
         Long pageNum = sysRoleQueryVo.getPageNum();
         Long pageSize = sysRoleQueryVo.getPageSize();
@@ -117,6 +131,7 @@ public class SysRoleController {
 
     /**
      * 删除角色
+     *
      * @param id
      * @return
      */
@@ -129,14 +144,15 @@ public class SysRoleController {
 
     /**
      * 批量删除
-     * @param batchDeleteRequestVo
+     *
+     * @param batchDeleteRequestVo 批量删除传入的id数组
      * @return
      */
     @ApiOperation("批量删除")
     @PostMapping("batchDelete")
     public Result<?> batchDelete(@RequestBody BatchDeleteRequestVo batchDeleteRequestVo) {
         List<Long> ids = batchDeleteRequestVo.getIds();
-        if(ids == null || ids.isEmpty()) {
+        if (ids == null || ids.isEmpty()) {
             return Result.fail("id数组不能为空");
         }
         boolean isSuccess = sysRoleService.removeByIds(ids);
