@@ -82,6 +82,7 @@ public class SysRoleController {
      * @param id
      * @return
      */
+
     @ApiOperation("根据id查询角色")
     @GetMapping("findRoleById/{id}")
     public Result<?> findRoleById(@PathVariable Long id) {
@@ -132,7 +133,7 @@ public class SysRoleController {
     /**
      * 删除角色
      *
-     * @param id
+     * @param id 角色id
      * @return
      */
     @ApiOperation("删除角色")
