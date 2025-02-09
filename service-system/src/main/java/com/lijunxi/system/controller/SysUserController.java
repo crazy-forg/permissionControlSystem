@@ -67,25 +67,73 @@ public class SysUserController {
 
     }
 
+
+    /**
+     *
+     * @param id 用户id
+     * @return 用户信息
+     */
+    @ApiOperation("根据id查询")
+    @GetMapping("selectById/{id}")
+    public Result<?> findById( @PathVariable String id) {
+        SysUser sysUser = sysUserService.getById(id);
+        return Result.ok(sysUser);
+    }
+
+    /**
+     *
+     * @param id 用户id
+     * @return 结果
+     */
+    @ApiOperation("根据id删除")
+    @GetMapping("remove/{id}")
+    public Result<?> removeUser(@PathVariable String id) {
+        boolean isSuccess = sysUserService.removeById(id);
+        return isSuccess ? Result.ok():Result.fail();
+    }
+
+//    @ApiOperation("添加用户")
+//    @PostMapping("addUser")
+//    public Result<?> addUser(@RequestBody SysUserAddVo sysUserAddVo) {
+//        QueryWrapper<SysUser> queryUserWrapper = new QueryWrapper<>();
+//
+//        queryUserWrapper.eq("username", sysUserAddVo.getUsername());
+//        int count = sysUserService.count(queryUserWrapper);
+//        if (count > 0) {
+//            return Result.fail().message("用户名已存在");
+//        }
+//
+//        QueryWrapper<SysUser> queryUserPhoneWrapper = new QueryWrapper<>();
+//        queryUserPhoneWrapper.eq("phone", sysUserAddVo.getPhone());
+//        int count1 = sysUserService.count(queryUserPhoneWrapper);
+//        if (count1 > 0) {
+//            return Result.fail().message("手机号已存在");
+//        }
+//
+//        boolean isSuccess = sysUserService.save(sysUserAddVo);
+//
+//        return isSuccess ? Result.ok() : Result.fail();
+//    }
+
     @ApiOperation("添加用户")
     @PostMapping("addUser")
-    public Result<?> addUser(@RequestBody SysUserAddVo sysUserAddVo) {
+    public Result<?> addUser(@RequestBody SysUser sysUser) {
         QueryWrapper<SysUser> queryUserWrapper = new QueryWrapper<>();
 
-        queryUserWrapper.eq("username", sysUserAddVo.getUsername());
+        queryUserWrapper.eq("username", sysUser.getUsername());
         int count = sysUserService.count(queryUserWrapper);
         if (count > 0) {
             return Result.fail().message("用户名已存在");
         }
 
         QueryWrapper<SysUser> queryUserPhoneWrapper = new QueryWrapper<>();
-        queryUserPhoneWrapper.eq("phone", sysUserAddVo.getPhone());
+        queryUserPhoneWrapper.eq("phone", sysUser.getPhone());
         int count1 = sysUserService.count(queryUserPhoneWrapper);
         if (count1 > 0) {
             return Result.fail().message("手机号已存在");
         }
 
-        boolean isSuccess = sysUserService.save(sysUserAddVo);
+        boolean isSuccess = sysUserService.save(sysUser);
 
         return isSuccess ? Result.ok() : Result.fail();
     }
