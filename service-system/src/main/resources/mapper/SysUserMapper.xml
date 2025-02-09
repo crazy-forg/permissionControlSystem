@@ -19,14 +19,25 @@
     </resultMap>
 
     <select id="selectPage" resultMap="SysUserMap">
-        select <include refid="columns" />
+        select
+        <include refid="columns"/>
 
         from sys_user
 
         <where>
             <if test="vo.keyword != null and vo.keyword !=''">
-                and(username like concat)
+                and (username like CONCAT('%', #{vo.keyword} , '%')
+                or name like CONCAT('%', #{vo.keyword} , '%')
+                or phone like CONCAT('%', #{vo.keyword} , '%'))
             </if>
+            <if test="vo.createTimeBegin != null and vo.createTimeBegin != ''">
+                and create_time >= #{vo.createTimeBegin}
+            </if>
+            <if test="vo.createTimeEnd != null and vo.createTimeEnd != ''">
+                and create_time &lt;= #{vo.createTimeEnd}
+            </if>
+            and is_deleted = 0
         </where>
+        order by id desc
     </select>
 </mapper>
