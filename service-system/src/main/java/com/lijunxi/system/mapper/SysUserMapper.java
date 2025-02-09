@@ -16,6 +16,8 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     boolean insert(SysUserAddVo sysUserAddVo);
 
+
+
     IPage<SysUser> selectPage(Page<SysUser> page, @Param("vo") SysUserQueryVo sysUserQueryVo);
 
 }
