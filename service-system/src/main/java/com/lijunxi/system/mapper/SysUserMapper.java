@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
+
     boolean insert(SysUserAddVo sysUserAddVo);
 
-    IPage<SysUser> selectPage(Page<SysUser> page, @Param("vo") SysUserQueryVo userQueryVo);
+    IPage<SysUser> selectPage(Page<SysUser> page, @Param("vo") SysUserQueryVo sysUserQueryVo);
+
 }

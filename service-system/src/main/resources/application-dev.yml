@@ -10,5 +10,5 @@ spring:
     username: root
     password: root
   jackson:
-    date-format: yy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

@@ -17,15 +17,16 @@
 
     <resultMap id="SysUserMap" type="com.lijunxi.model.system.SysUser" autoMapping="true">
     </resultMap>
+
     <select id="selectPage" resultMap="SysUserMap">
         select <include refid="columns" />
 
         from sys_user
 
         <where>
-          <if test="vo.keyword != null and vo.keyword !=''">
-              and(username like concat)
-          </if>
+            <if test="vo.keyword != null and vo.keyword !=''">
+                and(username like concat)
+            </if>
         </where>
     </select>
 </mapper>

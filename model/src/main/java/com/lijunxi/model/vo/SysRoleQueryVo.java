@@ -1,5 +1,4 @@
-//
-//
+
 package com.lijunxi.model.vo;
 
 import lombok.Data;

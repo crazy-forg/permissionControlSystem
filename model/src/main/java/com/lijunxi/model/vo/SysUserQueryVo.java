@@ -26,5 +26,9 @@ public class SysUserQueryVo implements Serializable {
 	private Long postId;
 	private Long deptId;
 
+	private Long pageSize;
+
+	private Long pageNum;
+
 }
 
