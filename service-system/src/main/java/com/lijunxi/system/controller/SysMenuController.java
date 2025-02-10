@@ -41,7 +41,7 @@ public class SysMenuController {
     }
 
     @ApiOperation(value = "修改菜单")
-    @PutMapping("update")
+    @PostMapping("update")
     public Result<?> updateById(@RequestBody SysMenu permission) {
         sysMenuService.updateById(permission);
         return Result.ok();
@@ -49,7 +49,7 @@ public class SysMenuController {
 
     @ApiOperation(value = "删除菜单")
     @DeleteMapping("remove/{id}")
-    public Result<?> remove(@PathVariable Long id) {
+    public Result<?> remove(@PathVariable String id) {
         sysMenuService.removeById(id);
         return Result.ok();
     }

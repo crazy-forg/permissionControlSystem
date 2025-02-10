@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lijunxi.common.result.Result;
 
 import com.lijunxi.model.system.SysUser;
-import com.lijunxi.model.vo.SysUserAddVo;
 import com.lijunxi.model.vo.SysUserQueryVo;
 import com.lijunxi.system.service.ISysUserService;
 import io.swagger.annotations.Api;
