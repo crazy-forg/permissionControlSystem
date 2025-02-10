@@ -79,14 +79,12 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     @Transactional
     public void doAssign(AssginRoleVo assginRoleVo) {
-        // 根据用户id删除之前的角色
+        //根据用户id删除原来分配的角色
         QueryWrapper<SysUserRole> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", assginRoleVo.getUserId());
+        queryWrapper.eq("user_id",assginRoleVo.getUserId());
         sysUserRoleMapper.delete(queryWrapper);
 
         // 获取所有角色id，添加到角色用户关系表
-
-        // 获取角色id列表
         List<String> roleIdList = assginRoleVo.getRoleIdList();
         for (String roleId : roleIdList) {
             SysUserRole sysUserRole = new SysUserRole();
