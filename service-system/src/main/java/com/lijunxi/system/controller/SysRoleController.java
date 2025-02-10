@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lijunxi.common.result.Result;
 import com.lijunxi.model.system.SysRole;
+import com.lijunxi.model.vo.AssginRoleVo;
 import com.lijunxi.model.vo.BatchDeleteRequestVo;
 import com.lijunxi.model.vo.SysRoleAddVo;
 import com.lijunxi.model.vo.SysRoleQueryVo;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Api(tags = "角色管理")
@@ -158,5 +160,20 @@ public class SysRoleController {
         }
         boolean isSuccess = sysRoleService.removeByIds(ids);
         return isSuccess ? Result.ok() : Result.fail();
+    }
+
+
+    @ApiOperation(value = "根据用户获取角色数据")
+    @GetMapping("/toAssign/{userId}")
+    public Result<?> toAssign(@PathVariable String userId) {
+        Map<String, Object> roleMap = sysRoleService.getRolesByUserId(userId);
+        return Result.ok(roleMap);
+    }
+
+    @ApiOperation(value = "根据用户分配角色")
+    @PostMapping("/doAssign")
+    public Result<?> doAssign(@RequestBody AssginRoleVo assginRoleVo) {
+        sysRoleService.doAssign(assginRoleVo);
+        return Result.ok();
     }
 }
