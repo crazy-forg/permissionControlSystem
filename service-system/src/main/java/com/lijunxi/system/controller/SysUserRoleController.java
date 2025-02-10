@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "用户角色管理")
 @RestController
-@RequestMapping("/sysUserRole")
+@RequestMapping("/admin/system/sysUserRole")
 public class SysUserRoleController {
 
 }
