@@ -2,6 +2,7 @@ package com.lijunxi.system.service;
 
 import com.lijunxi.model.system.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lijunxi.model.vo.AssginMenuVo;
 
 import java.util.List;
 
@@ -19,4 +20,16 @@ public interface ISysMenuService extends IService<SysMenu> {
      * @return
      */
     List<SysMenu> findNodes();
+
+    /**
+     * 根据角色获取授权权限数据
+     * @return
+     */
+    List<SysMenu> findSysMenuByRoleId(String roleId);
+
+    /**
+     * 保存角色权限
+     * @param  assginMenuVo
+     */
+    void doAssign(AssginMenuVo assginMenuVo);
 }
