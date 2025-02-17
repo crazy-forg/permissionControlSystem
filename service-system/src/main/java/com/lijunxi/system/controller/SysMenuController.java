@@ -5,6 +5,7 @@ import com.lijunxi.common.result.Result;
 import com.lijunxi.model.system.SysMenu;
 import com.lijunxi.model.vo.AssginMenuVo;
 import com.lijunxi.system.service.ISysMenuService;
+import com.lijunxi.system.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,17 @@ import java.util.List;
  * @author lijunxi
  * @since 2025-02-10
  */
-@Api(tags ="菜单管理")
+@Api(tags = "菜单管理")
 @RestController
 @RequestMapping("/admin/system/sysMenu")
 public class SysMenuController {
+
+    private final ISysMenuService sysMenuService;
+
     @Autowired
-    private ISysMenuService sysMenuService;
+    public SysMenuController(ISysMenuService sysMenuService) {
+        this.sysMenuService = sysMenuService;
+    }
 
     @ApiOperation(value = "获取菜单")
     @GetMapping("findNodes")
@@ -37,22 +43,22 @@ public class SysMenuController {
     @ApiOperation(value = "新增菜单")
     @PostMapping("save")
     public Result<?> save(@RequestBody SysMenu permission) {
-        sysMenuService.save(permission);
-        return Result.ok();
+        boolean isSuccess =  sysMenuService.save(permission);
+        return isSuccess ? Result.ok() : Result.fail();
     }
 
     @ApiOperation(value = "修改菜单")
     @PostMapping("update")
     public Result<?> updateById(@RequestBody SysMenu permission) {
-        sysMenuService.updateById(permission);
-        return Result.ok();
+        boolean isSuccess = sysMenuService.updateById(permission);
+        return isSuccess ? Result.ok() : Result.fail();
     }
 
     @ApiOperation(value = "删除菜单")
     @DeleteMapping("remove/{id}")
     public Result<?> remove(@PathVariable String id) {
-        sysMenuService.removeById(id);
-        return Result.ok();
+        boolean isSuccess = sysMenuService.removeById(id);
+        return isSuccess ? Result.ok() : Result.fail();
     }
 
     @ApiOperation(value = "根据角色获取菜单")

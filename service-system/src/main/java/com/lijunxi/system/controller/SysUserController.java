@@ -36,6 +36,7 @@ public class SysUserController {
     public SysUserController(ISysUserService sysUserService) {
         this.sysUserService = sysUserService;
     }
+
     /**
      * 分页查询
      *
@@ -69,19 +70,17 @@ public class SysUserController {
 
 
     /**
-     *
      * @param id 用户id
      * @return 用户信息
      */
     @ApiOperation("根据id查询")
     @GetMapping("getUser/{id}")
-    public Result<?> findById( @PathVariable String id) {
+    public Result<?> findById(@PathVariable String id) {
         SysUser sysUser = sysUserService.getById(id);
         return Result.ok(sysUser);
     }
 
     /**
-     *
      * @param id 用户id
      * @return 结果
      */
@@ -89,7 +88,7 @@ public class SysUserController {
     @DeleteMapping("remove/{id}")
     public Result<?> removeUser(@PathVariable String id) {
         boolean isSuccess = sysUserService.removeById(id);
-        return isSuccess ? Result.ok():Result.fail();
+        return isSuccess ? Result.ok() : Result.fail();
     }
 
     @ApiOperation(value = "更新用户")
