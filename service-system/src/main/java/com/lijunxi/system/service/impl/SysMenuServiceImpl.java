@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.lijunxi.model.system.SysMenu;
 import com.lijunxi.model.system.SysRoleMenu;
 import com.lijunxi.model.vo.AssginMenuVo;
+import com.lijunxi.model.vo.RouterVo;
 import com.lijunxi.system.helper.MenuHelper;
+import com.lijunxi.system.helper.RouterHelper;
 import com.lijunxi.system.mapper.SysMenuMapper;
 import com.lijunxi.system.mapper.SysRoleMenuMapper;
 import com.lijunxi.system.service.ISysMenuService;
@@ -81,5 +83,53 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 sysRoleMenuMapper.insert(sysRoleMenu);
             }
         }
+    }
+
+    @Override
+    public List<RouterVo> getUserMenuList(String userId) {
+
+        List<SysMenu> sysMenuList = null;
+
+        // 如果userId ==1 是超级管理员
+        if ("1".equals(userId)) {
+            QueryWrapper<SysMenu> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("status", 1);
+            queryWrapper.orderByAsc("sort_value");
+            sysMenuList = baseMapper.selectList(queryWrapper);
+
+        } else {
+            sysMenuList = baseMapper.findMenuListByUserId(userId);
+        }
+
+        // 树形构建
+        List<SysMenu> sysMenusTree = MenuHelper.buildTree(sysMenuList);
+
+        // 转换为前端所需数据结构
+        return RouterHelper.buildRouters(sysMenusTree);
+    }
+
+    @Override
+    public List<String> getUserButtonList(String userId) {
+        List<SysMenu> sysMenuList = null;
+
+        // 如果userId ==1 是超级管理员
+        if ("1".equals(userId)) {
+            sysMenuList = baseMapper.selectList(new QueryWrapper<SysMenu>().eq("status", 1));
+        } else {
+            sysMenuList = baseMapper.findMenuListByUserId(userId);
+        }
+
+        //遍历获取按钮权限集合
+        List<String> buttonList = new ArrayList<>();
+
+        for (SysMenu sysMenu : sysMenuList) {
+            if (sysMenu.getType() == 2) {
+                String permission = sysMenu.getPerms();
+                buttonList.add(permission);
+            }
+
+        }
+
+        return buttonList;
     }
 }

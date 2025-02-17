@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lijunxi.common.result.Result;
 
+import com.lijunxi.common.utils.MD5;
 import com.lijunxi.model.system.SysUser;
 import com.lijunxi.model.vo.SysUserQueryVo;
 import com.lijunxi.system.service.ISysUserService;
@@ -115,6 +116,10 @@ public class SysUserController {
         if (count1 > 0) {
             return Result.fail().message("手机号已存在");
         }
+
+        // 对密码进行加密
+        String encryptPassword = MD5.encrypt(sysUser.getPassword());
+        sysUser.setPassword(encryptPassword);
 
         boolean isSuccess = sysUserService.save(sysUser);
 

@@ -5,4 +5,33 @@
     <resultMap id="sysMenuMap" type="com.lijunxi.model.system.SysMenu" autoMapping="true">
     </resultMap>
 
+    <select id="findMenuListByUserId" resultType="com.lijunxi.model.system.SysMenu"
+            parameterType="java.lang.String">
+        select distinct m.id,
+                        m.parent_id,
+                        m.name,
+                        m.type,
+                        m.path,
+                        m.component,
+                        m.perms,
+                        m.icon,
+                        m.sort_value,
+                        m.status,
+                        m.create_time,
+                        m.update_time,
+                        m.is_deleted
+        FROM sys_menu m
+        WHERE m.status = 1
+          AND m.is_deleted = 0
+          AND EXISTS (SELECT 1
+                      FROM sys_role_menu rm
+                               JOIN sys_user_role ur ON rm.role_id = ur.role_id
+                      WHERE rm.menu_id = m.id
+                        AND ur.user_id = #{userId}
+                        AND rm.is_deleted = 0
+                        AND ur.is_deleted = 0)
+
+    </select>
+
+
 </mapper>

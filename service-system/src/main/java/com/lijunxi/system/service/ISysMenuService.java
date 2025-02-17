@@ -3,6 +3,7 @@ package com.lijunxi.system.service;
 import com.lijunxi.model.system.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lijunxi.model.vo.AssginMenuVo;
+import com.lijunxi.model.vo.RouterVo;
 
 import java.util.List;
 
@@ -32,4 +33,8 @@ public interface ISysMenuService extends IService<SysMenu> {
      * @param  assginMenuVo
      */
     void doAssign(AssginMenuVo assginMenuVo);
+
+    List<RouterVo> getUserMenuList(String id);
+
+    List<String> getUserButtonList(String id);
 }
