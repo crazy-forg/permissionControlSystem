@@ -71,4 +71,5 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         result.put("buttons", permsList);
         return result;
     }
+
 }
