@@ -43,8 +43,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         if (CollectionUtils.isEmpty(sysMenuList)) return null;
 
         //构建树形数据
-        List<SysMenu> result = MenuHelper.buildTree(sysMenuList);
-        return result;
+        return MenuHelper.buildTree(sysMenuList);
     }
 
     @Override
@@ -64,8 +63,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             sysMenu.setSelect(roleMenuIds.contains(sysMenu.getId()));
         }
         //将权限列表转换为权限树
-        List<SysMenu> sysMenus = MenuHelper.buildTree(menuList);
-        return sysMenus;
+        return MenuHelper.buildTree(menuList);
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.lijunxi.system.service.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public class SysRoleController {
      * @param role
      * @return
      */
+    @PreAuthorize("hasAuthority('bnt.sysRole.update')")
     @ApiOperation("修改角色")
     @PostMapping("updateRole")
     public Result<?> updateRole(@RequestBody SysRole role) {
@@ -55,13 +57,13 @@ public class SysRoleController {
 
     }
 
-
     /**
      * 新增角色
      *
      * @param sysRoleAddVo 新增角色条件对象
      * @return
      */
+    @PreAuthorize("hasAuthority('bnt.sysRole.add')")
     @ApiOperation("添加角色")
     @PostMapping("addRole")
     public Result<?> addRole(@RequestBody SysRoleAddVo sysRoleAddVo) {
@@ -84,7 +86,7 @@ public class SysRoleController {
      * @param id
      * @return
      */
-
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation("根据id查询角色")
     @GetMapping("findRoleById/{id}")
     public Result<?> findRoleById(@PathVariable Long id) {
@@ -106,6 +108,7 @@ public class SysRoleController {
      *
      * @return
      */
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation("查询所有角色")
     @GetMapping("findAll")
     public Result<?> findAll() {
@@ -114,13 +117,13 @@ public class SysRoleController {
         return Result.ok(list);
     }
 
-
     /**
      * 分页查询
      *
      * @param sysRoleQueryVo 角色查询条件对象，包含查询所需的角色信息
      * @return
      */
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @ApiOperation("分页查询")
     @GetMapping("selectPage")
     public Result<?> findQueryRole(SysRoleQueryVo sysRoleQueryVo) {
@@ -138,6 +141,7 @@ public class SysRoleController {
      * @param id 角色id
      * @return
      */
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation("删除角色")
     @DeleteMapping("remove/{id}")
     public Result<?> remove(@PathVariable("id") Long id) {
@@ -151,6 +155,7 @@ public class SysRoleController {
      * @param batchDeleteRequestVo 批量删除传入的id数组
      * @return
      */
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation("批量删除")
     @PostMapping("batchDelete")
     public Result<?> batchDelete(@RequestBody BatchDeleteRequestVo batchDeleteRequestVo) {
@@ -161,7 +166,6 @@ public class SysRoleController {
         boolean isSuccess = sysRoleService.removeByIds(ids);
         return isSuccess ? Result.ok() : Result.fail();
     }
-
 
     @ApiOperation(value = "根据用户获取角色数据")
     @GetMapping("/toAssign/{userId}")
