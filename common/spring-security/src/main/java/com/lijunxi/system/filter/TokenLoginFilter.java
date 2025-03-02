@@ -8,6 +8,8 @@ import com.lijunxi.common.utils.JwtHelper;
 import com.lijunxi.common.utils.ResponseUtil;
 import com.lijunxi.model.vo.LoginVo;
 import com.lijunxi.system.custom.CustomUser;
+import com.lijunxi.system.service.AsyncLoginLogService;
+import com.lijunxi.system.utils.IpUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,14 +34,18 @@ import java.util.Map;
  */
 public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
 
-    private RedisTemplate redisTemplate;
+    private final RedisTemplate redisTemplate;
 
-    public TokenLoginFilter(AuthenticationManager authenticationManager,RedisTemplate redisTemplate) {
+    private  final AsyncLoginLogService asyncLoginLogService;
+
+    public TokenLoginFilter(AuthenticationManager authenticationManager, RedisTemplate redisTemplate, AsyncLoginLogService asyncLoginLogService) {
+        this.asyncLoginLogService = asyncLoginLogService;
         this.setAuthenticationManager(authenticationManager);
         this.setPostOnly(false);
         //指定登录接口及提交方式，可以指定任意路径
         this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/system/index/login","POST"));
         this.redisTemplate = redisTemplate;
+
     }
 
     /**
@@ -80,6 +86,9 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         //保存权限数据
         redisTemplate.opsForValue().set(customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
+
+        //记录日志
+        asyncLoginLogService.recordLoginLog(customUser.getUsername(), 1, IpUtil.getIpAddress(request), "登录成功");
 
         Map<String, Object> map = new HashMap<>();
         map.put("token", token);

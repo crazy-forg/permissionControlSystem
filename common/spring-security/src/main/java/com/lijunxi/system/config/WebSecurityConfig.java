@@ -3,6 +3,7 @@ package com.lijunxi.system.config;
 import com.lijunxi.system.custom.CustomMd5PasswordEncoder;
 import com.lijunxi.system.filter.TokenAuthenticationFilter;
 import com.lijunxi.system.filter.TokenLoginFilter;
+import com.lijunxi.system.service.AsyncLoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +35,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private  AsyncLoginLogService asyncLoginLogService;
+
+    public WebSecurityConfig(AsyncLoginLogService asyncLoginLogService) {
+        this.asyncLoginLogService = asyncLoginLogService;
+    }
+
     @Bean
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
@@ -56,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //TokenAuthenticationFilter放到UsernamePasswordAuthenticationFilter的前面，这样做就是为了除了登录的时候去查询数据库外，其他时候都用token进行认证。
                 .addFilterBefore(new TokenAuthenticationFilter(redisTemplate), UsernamePasswordAuthenticationFilter.class)
-                .addFilter(new TokenLoginFilter(authenticationManager(), redisTemplate));
+                .addFilter(new TokenLoginFilter(authenticationManager(), redisTemplate,asyncLoginLogService));
 
         //禁用session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
