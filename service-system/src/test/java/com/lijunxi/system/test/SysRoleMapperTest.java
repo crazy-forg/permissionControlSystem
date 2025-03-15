@@ -3,7 +3,9 @@ package com.lijunxi.system.test;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lijunxi.model.system.SysRole;
+import com.lijunxi.model.system.SysUser;
 import com.lijunxi.system.mapper.SysRoleMapper;
+import com.lijunxi.system.mapper.SysUserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +18,16 @@ public class SysRoleMapperTest {
 
     @Autowired
     private SysRoleMapper sysRoleMapper;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
+
+    @Test
+    public void findAllUser() {
+        List<SysUser> sysUsers = sysUserMapper.selectList(null);
+        System.out.println(sysUsers);
+    }
 
 
     @Test
@@ -31,7 +43,6 @@ public class SysRoleMapperTest {
     public void testFindById() {
         SysRole sysRole = sysRoleMapper.selectById(1);
         System.out.println(sysRole);
-
     }
 
     @Test
