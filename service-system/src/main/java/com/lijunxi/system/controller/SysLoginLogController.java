@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-@Api(value = "SysLoginLog管理", tags = "登录管理")
+@Api( tags = "登录日志管理")
 @RestController
 @RequestMapping(value="/admin/system/sysLoginLog")
-@SuppressWarnings({"unchecked", "rawtypes"})
 public class SysLoginLogController {
 
     @Resource
@@ -27,7 +26,7 @@ public class SysLoginLogController {
 
     @ApiOperation(value = "获取分页列表")
     @GetMapping("{page}/{limit}")
-    public Result index(
+    public Result<?> getPage(
             @ApiParam(name = "page", value = "当前页码", required = true)
             @PathVariable Long page,
 
@@ -43,7 +42,7 @@ public class SysLoginLogController {
 
     @ApiOperation(value = "获取")
     @GetMapping("get/{id}")
-    public Result get(@PathVariable Long id) {
+    public Result<?> getById(@PathVariable String id) {
         SysLoginLog sysLoginLog = sysLoginLogService.getById(id);
         return Result.ok(sysLoginLog);
     }
