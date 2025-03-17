@@ -10,9 +10,12 @@ import com.lijunxi.model.vo.AssginRoleVo;
 import com.lijunxi.model.vo.BatchDeleteRequestVo;
 import com.lijunxi.model.vo.SysRoleAddVo;
 import com.lijunxi.model.vo.SysRoleQueryVo;
+import com.lijunxi.system.annotation.Log;
+import com.lijunxi.system.enums.BusinessType;
 import com.lijunxi.system.service.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +43,7 @@ public class SysRoleController {
      * @param role
      * @return
      */
+    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PreAuthorize("hasAuthority('bnt.sysRole.update')")
     @ApiOperation("修改角色")
     @PostMapping("updateRole")
