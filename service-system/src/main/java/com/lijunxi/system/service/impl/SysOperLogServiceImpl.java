@@ -1,6 +1,7 @@
 package com.lijunxi.system.service.impl;
 
-import com.lijunxi.system.entity.SysOperLog;
+
+import com.lijunxi.model.system.SysOperLog;
 import com.lijunxi.system.mapper.SysOperLogMapper;
 import com.lijunxi.system.service.ISysOperLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

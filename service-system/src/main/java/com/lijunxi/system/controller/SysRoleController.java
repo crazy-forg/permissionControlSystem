@@ -60,7 +60,7 @@ public class SysRoleController {
     /**
      * 新增角色
      *
-     * @param sysRoleAddVo 新增角色条件对象
+     * @param sysRoleAddVo
      * @return
      */
     @PreAuthorize("hasAuthority('bnt.sysRole.add')")
