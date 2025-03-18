@@ -17,5 +17,5 @@ import org.apache.ibatis.annotations.Param;
  * @since 2025-03-15
  */
 public interface SysOperLogMapper extends BaseMapper<SysOperLog> {
-    IPage<SysOperLog> selectPage(Page<SysOperLog> page, @Param("vo") SysOperLogQueryVo sysOperLogQueryVo);
+//    IPage<SysOperLog> selectPage(Page<SysOperLog> page, @Param("vo") SysOperLogQueryVo sysOperLogQueryVo);
 }
