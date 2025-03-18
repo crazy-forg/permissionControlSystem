@@ -36,6 +36,10 @@ public class SysMenu extends BaseEntity {
 	@TableField("component")
 	private String component;
 
+	@ApiModelProperty(value = "重定向路径")
+	@TableField("redirect")
+	private String redirect;
+
 	@ApiModelProperty(value = "权限标识")
 	@TableField("perms")
 	private String perms;

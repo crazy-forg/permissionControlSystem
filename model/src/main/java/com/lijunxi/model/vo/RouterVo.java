@@ -32,6 +32,11 @@ public class RouterVo
     private String component;
 
     /**
+     * 重定向地址
+     */
+    private String redirect;
+
+    /**
      * 当你一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式--如组件页面
      */
     private Boolean alwaysShow;

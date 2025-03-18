@@ -7,10 +7,7 @@ import com.lijunxi.model.system.SysMenu;
 import com.lijunxi.system.service.ISysDeptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +36,27 @@ public class SysDeptController {
     public Result<?> findNodes() {
         List<SysDept> list = sysDeptService.getDeptTree();
         return Result.ok(list);
+    }
+
+    @ApiOperation(value = "新增部门")
+    @PostMapping("/save")
+    public Result<String> saveDept(@RequestBody SysDept sysDept) {
+        sysDeptService.saveDept(sysDept);
+        return Result.ok("部门新增成功");
+    }
+
+    @ApiOperation(value = "更新部门")
+    @PutMapping("/update")
+    public Result<String> updateDept(@RequestBody SysDept sysDept) {
+        sysDeptService.updateDept(sysDept);
+        return Result.ok("部门更新成功");
+    }
+
+    @ApiOperation(value = "删除部门")
+    @DeleteMapping("/remove/{id}")
+    public Result<String> removeDept(@PathVariable Long id) {
+        sysDeptService.removeDept(id);
+        return Result.ok("部门删除成功");
     }
 
 }

@@ -18,4 +18,8 @@ import java.util.List;
 public interface ISysDeptService extends IService<SysDept> {
 
     List<SysDept> getDeptTree();
+    void saveDept(SysDept sysDept);
+    void updateDept(SysDept sysDept);
+    void removeDept(Long id);
+
 }
