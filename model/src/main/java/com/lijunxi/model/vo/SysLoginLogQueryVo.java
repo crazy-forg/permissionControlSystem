@@ -11,6 +11,9 @@ public class SysLoginLogQueryVo {
 
 	private String createTimeBegin;
 	private String createTimeEnd;
+	private String pageNum;
+	private String pageSize;
+
 
 }
 

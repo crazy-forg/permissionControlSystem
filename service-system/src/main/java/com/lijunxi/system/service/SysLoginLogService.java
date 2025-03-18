@@ -8,5 +8,6 @@ import com.lijunxi.model.vo.SysLoginLogQueryVo;
 
 public interface SysLoginLogService extends IService<SysLoginLog> {
     //列表显示
-    IPage<SysLoginLog> selectPage(Page<SysLoginLog> pageParam, SysLoginLogQueryVo sysLoginLogQueryVo);
+    IPage<SysLoginLog> pageQuery(SysLoginLogQueryVo queryVo);
+
 }

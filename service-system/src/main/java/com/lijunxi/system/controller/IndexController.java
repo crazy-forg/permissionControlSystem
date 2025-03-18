@@ -71,11 +71,6 @@ public class IndexController {
 
         // 根据用户名称获取用户信息
         Map<String, Object> map = sysUserService.getUserInfo(username);
-
-//        Map<String, Object> map  new HashMap<>();
-//        map.put("roles", "[admin]");
-//        map.put("name", "admin");
-//        map.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         return Result.ok(map);
 
     }
