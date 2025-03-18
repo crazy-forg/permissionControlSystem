@@ -15,6 +15,7 @@ import com.lijunxi.system.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class SysUserController {
      * @param sysUserQueryVo 查询条件对象，包含查询所需的信息
      * @return 分页查询结果
      */
+    @PreAuthorize("hasAuthority('bnt.sysUser.list')")
     @ApiOperation("分页查询")
     @GetMapping("selectPage")
     public Result<?> findQueryUser(SysUserQueryVo sysUserQueryVo) {
@@ -61,6 +63,7 @@ public class SysUserController {
      *
      * @return 所有用户列表
      */
+    @PreAuthorize("hasAuthority('bnt.sysUser.list')")
     @ApiOperation("查询所有用户")
     @GetMapping("findAll")
     public Result<?> findAll() {
@@ -75,6 +78,7 @@ public class SysUserController {
      * @param id 用户id
      * @return 用户信息
      */
+    @PreAuthorize("hasAuthority('bnt.sysUser.list')")
     @ApiOperation("根据id查询")
     @GetMapping("getUser/{id}")
     public Result<?> findById(@PathVariable String id) {
@@ -87,6 +91,7 @@ public class SysUserController {
      * @return 结果
      */
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
+    @PreAuthorize("hasAuthority('bnt.sysUser.remove')")
     @ApiOperation("根据id删除")
     @DeleteMapping("remove/{id}")
     public Result<?> removeUser(@PathVariable String id) {
@@ -95,6 +100,7 @@ public class SysUserController {
     }
 
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
+    @PreAuthorize("hasAuthority('bnt.sysUser.update')")
     @ApiOperation(value = "更新用户")
     @PostMapping("/update")
     public Result<?> updateById(@RequestBody SysUser user) {
@@ -103,6 +109,7 @@ public class SysUserController {
     }
 
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
+    @PreAuthorize("hasAuthority('bnt.sysUser.add')")
     @ApiOperation("添加用户")
     @PostMapping("addUser")
     public Result<?> addUser(@RequestBody SysUser sysUser) {
