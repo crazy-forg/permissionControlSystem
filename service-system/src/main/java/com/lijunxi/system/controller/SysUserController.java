@@ -9,6 +9,8 @@ import com.lijunxi.common.result.Result;
 import com.lijunxi.common.utils.MD5;
 import com.lijunxi.model.system.SysUser;
 import com.lijunxi.model.vo.SysUserQueryVo;
+import com.lijunxi.system.annotation.Log;
+import com.lijunxi.system.enums.BusinessType;
 import com.lijunxi.system.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -84,6 +86,7 @@ public class SysUserController {
      * @param id 用户id
      * @return 结果
      */
+    @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除")
     @DeleteMapping("remove/{id}")
     public Result<?> removeUser(@PathVariable String id) {
@@ -91,6 +94,7 @@ public class SysUserController {
         return isSuccess ? Result.ok() : Result.fail();
     }
 
+    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @ApiOperation(value = "更新用户")
     @PostMapping("/update")
     public Result<?> updateById(@RequestBody SysUser user) {
@@ -98,6 +102,7 @@ public class SysUserController {
         return Result.ok();
     }
 
+    @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @ApiOperation("添加用户")
     @PostMapping("addUser")
     public Result<?> addUser(@RequestBody SysUser sysUser) {

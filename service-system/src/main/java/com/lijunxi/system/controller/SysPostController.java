@@ -10,6 +10,8 @@ import com.lijunxi.model.system.SysPost;
 import com.lijunxi.model.system.SysUser;
 import com.lijunxi.model.vo.SysPostQueryVo;
 import com.lijunxi.model.vo.SysUserQueryVo;
+import com.lijunxi.system.annotation.Log;
+import com.lijunxi.system.enums.BusinessType;
 import com.lijunxi.system.service.ISysPostService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -53,6 +55,7 @@ public class SysPostController {
         return Result.ok(sysPostIPage);
     }
 
+    @Log(title = "岗位管理", businessType = BusinessType.INSERT)
     @ApiOperation("添加岗位")
     @PostMapping("addPost")
     public Result<?> addUser(@RequestBody SysPost sysPost) {
@@ -84,6 +87,7 @@ public class SysPostController {
      * @param id 用户id
      * @return 结果
      */
+    @Log(title = "岗位管理", businessType = BusinessType.DELETE)
     @ApiOperation("根据id删除")
     @DeleteMapping("remove/{id}")
     public Result<?> removeUser(@PathVariable String id) {
@@ -91,6 +95,7 @@ public class SysPostController {
         return isSuccess ? Result.ok() : Result.fail();
     }
 
+    @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
     @ApiOperation(value = "更新用户")
     @PostMapping("/update")
     public Result<?> updateById(@RequestBody SysPost sysPost) {

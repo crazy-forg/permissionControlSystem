@@ -67,6 +67,7 @@ public class SysRoleController {
      * @param sysRoleAddVo
      * @return
      */
+    @Log(title = "角色管理", businessType = BusinessType.INSERT)
     @PreAuthorize("hasAuthority('bnt.sysRole.add')")
     @ApiOperation("添加角色")
     @PostMapping("addRole")
@@ -145,6 +146,7 @@ public class SysRoleController {
      * @param id 角色id
      * @return
      */
+    @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation("删除角色")
     @DeleteMapping("remove/{id}")
@@ -159,6 +161,7 @@ public class SysRoleController {
      * @param batchDeleteRequestVo 批量删除传入的id数组
      * @return
      */
+    @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @ApiOperation("批量删除")
     @PostMapping("batchDelete")
@@ -178,6 +181,7 @@ public class SysRoleController {
         return Result.ok(roleMap);
     }
 
+    @Log(title = "角色管理", businessType = BusinessType.ASSGIN)
     @ApiOperation(value = "根据用户分配角色")
     @PostMapping("/doAssign")
     public Result<?> doAssign(@RequestBody AssginRoleVo assginRoleVo) {

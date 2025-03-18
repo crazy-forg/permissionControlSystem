@@ -38,7 +38,8 @@ public class Knife4jConfig {
         pars.add(tokenPar.build());
         //添加head参数end
 
-        Docket adminApi = new Docket(DocumentationType.SWAGGER_2)
+        //只显示admin路径下的页面
+        return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("adminApi")
                 .apiInfo(adminApiInfo())
                 .select()
@@ -47,7 +48,6 @@ public class Knife4jConfig {
                 .paths(PathSelectors.regex("/admin/.*"))
                 .build()
                 .globalOperationParameters(pars);
-        return adminApi;
     }
 
     private ApiInfo adminApiInfo(){
@@ -56,7 +56,8 @@ public class Knife4jConfig {
                 .title("后台管理系统-API文档")
                 .description("本文档描述了后台管理系统微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("lijunxi", "", "1664478831@qq.com"))
+                .termsOfServiceUrl("/")
+                .contact(new Contact("lijunxi", "/", "1664478831@qq.com"))
                 .build();
     }
 }

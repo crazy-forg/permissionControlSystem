@@ -4,6 +4,8 @@ package com.lijunxi.system.controller;
 import com.lijunxi.common.result.Result;
 import com.lijunxi.model.system.SysMenu;
 import com.lijunxi.model.vo.AssginMenuVo;
+import com.lijunxi.system.annotation.Log;
+import com.lijunxi.system.enums.BusinessType;
 import com.lijunxi.system.service.ISysMenuService;
 import com.lijunxi.system.service.ISysUserService;
 import io.swagger.annotations.Api;
@@ -40,6 +42,7 @@ public class SysMenuController {
         return Result.ok(list);
     }
 
+    @Log(title = "菜单管理", businessType = BusinessType.INSERT)
     @ApiOperation(value = "新增菜单")
     @PostMapping("save")
     public Result<?> save(@RequestBody SysMenu permission) {
@@ -47,6 +50,7 @@ public class SysMenuController {
         return isSuccess ? Result.ok() : Result.fail();
     }
 
+    @Log(title = "菜单管理", businessType = BusinessType.UPDATE)
     @ApiOperation(value = "修改菜单")
     @PostMapping("update")
     public Result<?> updateById(@RequestBody SysMenu permission) {
@@ -54,6 +58,7 @@ public class SysMenuController {
         return isSuccess ? Result.ok() : Result.fail();
     }
 
+    @Log(title = "菜单管理", businessType = BusinessType.DELETE)
     @ApiOperation(value = "删除菜单")
     @DeleteMapping("remove/{id}")
     public Result<?> remove(@PathVariable String id) {
@@ -68,6 +73,7 @@ public class SysMenuController {
         return Result.ok(list);
     }
 
+    @Log(title = "菜单管理", businessType = BusinessType.ASSGIN)
     @ApiOperation(value = "给角色分配权限")
     @PostMapping("/doAssign")
     public Result<?> doAssign(@RequestBody AssginMenuVo assginMenuVo) {
